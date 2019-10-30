@@ -165,7 +165,7 @@
 1. Your old repository's clone URL 부분에 다음을 입력합니다.
 
     ~~~
-    https://github.com/MangDan/cloud-native-devops-workshop-wercker-oke
+    https://github.com/jonggyoukim/cloud-native-oke
     ~~~
 
     ![](images/github4.png)
