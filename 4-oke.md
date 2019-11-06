@@ -1,11 +1,11 @@
 # OCI (Oracle Cloud Infrastructure) 시작하기
 1. 브라우저에서 Oracle Cloud Infrastructure에 로그인하기 위해 제공 한 URL로 이동하십시오. (예: https://console.us-ashburn-1.oraclecloud.com/)
 
-   ![Tenant](https://image.prntscr.com/image/05I_oK2xTJCbV6dysxS_OQ.png)
+   ![Tenant](images/oke1.png)
 
 1. Tenant명에는 제공된 명을 입력합니다.
 
-   ![login](https://image.prntscr.com/image/n4ZodMHLSFK8nC5oRSmD3g.png)
+   ![login](images/oke2.png)
 
 1. 클러스터를 만들 수있는 적절한 권한이있는 임차인을 지정하십시오. 다음 권한 중 하나를 사용하여 이러한 사용 권한을 상속합니다.
     - 임차인의 관리자 그룹에 속함
@@ -17,19 +17,19 @@ Kubernetes를 설정하기 위해서는 권한을 부여해야 합니다.
 
 1. 왼쪽 상위의 MENU를 누르고 Identy 항목의 Policies 를 선택합니다.
 
-   ![Policies 선택](https://image.prntscr.com/image/X0n6zTtbT-GARx9EYo-EAw.png)
+   ![Policies 선택](images/oke3.png)
     
 1. COMPARTMENT 아래 메뉴를 눌러 (root) 라고 표기된 compartment를 선택합니다.
 
-   ![compartment 선택](https://image.prntscr.com/image/gH_TWTO2QMywpI6Ap8XQjw.png)
+   ![compartment 선택](images/oke4.png)
 
 1. Create Policy 버튼을 클릭하여 새로운 Policy를 만듭니다.
 
-   ![Policy 생성](https://image.prntscr.com/image/ZF8vpamuSl_sf2FgloIxVw.png)
+   ![Policy 생성](images/oke5.png)
 
 1. NAME을 쓰고(예:oke-service) STATEMENT에 "`allow service OKE to manage all-resources in tenancy`" 라고 입력합니다.
 
-   ![STATEMENT 입력](https://image.prntscr.com/image/xfkQfzYHRz60toO01zjKGw.png)
+   ![STATEMENT 입력](images/oke6.png)
 
 저장을 하면 Kubernetes 클러스터링을 만들 수 있는 권한이 부여가 되었습니다.
 
@@ -39,15 +39,15 @@ Kubernetes를 설정하기 위해서는 권한을 부여해야 합니다.
 
     **개발자 서비스 > 컨테이너 클러스터(OKE)** 를 눌러 클러스터 관리화면을 보여줍니다.
 
-    ![Alt text](https://monosnap.com/image/Q3VaaKATIJmt24DKvQfrJalagsLLCl)
+    ![Alt text](images/oke7.png)
 
 1. **클러스터 생성** 버튼을 클릭합니다.
 
-    ![Alt text](https://monosnap.com/image/X0OxxuuNq3BkHZDyqgps3utYy8LVjk)
+    ![Alt text](images/oke8.png)
 
 1. **생성** 을 클릭하여 클러스터를 만듭니다.
 
-    ![Alt text](https://monosnap.com/image/gIehPYWvJPXCJeB72fvjXSTVx44jPE)
+    ![Alt text](images/oke9.png)
 
 
 # kubeconfig 설정
@@ -60,11 +60,11 @@ Kubernetes를 설정하기 위해서는 권한을 부여해야 합니다.
 
 1. 개발자 서비스 > 컨테이너 클러스터(OKE)를 선택하고, 이전에 만들었던 클러스터를 선택합니다.
     
-    ![Alt text](https://monosnap.com/image/AsXRAKoBcYWLnVnb7N0OcrIRcoq7GX)
+    ![Alt text](images/oke10.png)
 
 1. `Kube Cluster`에 대한 세부 정보가 표시된 클러스터 페이지에서 Access Kubeconfig를 클릭하여 Kubeconfig 액세스 방법 대화 상자를 표시합니다.
 
-    ![Alt text](https://monosnap.com/image/vhd4fUiyL5yZPJLsjH1IEOTxO8FwE6.png)
+    ![Alt text](images/oke11.png)
 
 1. 화면에 나온 명령어를 복사하여 터미널에서 실행합니다. 
 
@@ -99,5 +99,7 @@ Kubernetes를 설정하기 위해서는 권한을 부여해야 합니다.
     $ kubectl cluster-info
     ~~~
     
-    ![Alt text](https://monosnap.com/image/Nu2zju3BiZoOIWLWI51IehLRvNAOWa)
+    ![Alt text](images/oke12.png)
     
+---
+완료하셨습니다.
