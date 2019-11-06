@@ -3,60 +3,88 @@
 
 Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성해 보도록 합니다. 이 애플리케이션은 MySQL에 새로운 유저와 테이블을 사용합니다.
 
+## 소스 가져오기
 
 애플리케이션의 소스는 미리 만들어진 것을 가져와서 사용하고, MySQL은 미리 만들어진 도커 이미지를 사용합니다.
 
 1. git 클라이언트를 설치합니다.
 
     ~~~
-    $ sudo yum install -y git
+    sudo yum install -y git
     ~~~
 
 1. git 에서 기존에 만들어진 애플리케이션 소스를 가져옵니다.
 
     ~~~
-    $ cd
-    $ git clone https://github.com/jonggyoukim/sample-app
+    cd
+    git clone https://github.com/jonggyoukim/cloud-native-oke
     ~~~
 
     sample-app 디렉토리로 이동을 합니다.
     ~~~
-    $ cd sample-app
+    cd cloud-native-oke
     ~~~
 
-    
+
+## 데이터베이스 시작
+
+> 데이터베이스는 미리 서비스 중인 것을 사용할 것입니다.  
+> 그러므로 다음의 항목은 skip 하셔도 됩니다.
+
+1. 포트 열기
+
+    ~~~sh
+    sudo firewall-cmd --add-port=3306/tcp --permanent
+    sudo systemctl restart firewalld
+    ~~~
+
 1. MySQL 컨테이너 실행하기
 
     ~~~
-    $ docker run --name mydb -e MYSQL_ROOT_PASSWORD=mypassword -p 3306:3306 -d mysql:5.7 
+    docker run --name mydb -e MYSQL_ROOT_PASSWORD=mypassword -p 3306:3306 -d mysql:5.7 
     ~~~
 
 1. 애플리케이션용 테이블 만들기
 
     ~~~sh
-    $ cat create.sql | docker exec -i mydb mysql -u root -pmypassword
+    cat create.sql | docker exec -i mydb mysql -u root -pmypassword
     #exit
     ~~~
 
+
+
+## 애플리케이션 시작
+
+1. 포트 열기
+
+    ~~~sh
+    sudo firewall-cmd --add-port=8080/tcp --permanent
+    sudo systemctl restart firewalld
+    ~~~
+    
 1. npm 설치
 
     ~~~
-    $ sudo yum -y install npm
+    sudo yum -y install npm
+    ~~~
+
+1. 환경설정하기
+
+    해당 애플리케이션은 MySQL에 접속하기 위해서 환경변수가 필요합니다.  
+    미리 기동해 놓은 mysql에 대한 설정을 합니다.
+    ~~~sh
+    export MYSQL_SERVICE_HOST=129.213.149.203
+    export MYSQL_SERVICE_USER=test
+    export MYSQL_SERVICE_PASSWORD=Welcome1
+    export MYSQL_SERVICE_DATABASE=sample
     ~~~
 
 1. 애플리케이션 실행하기
 
     ~~~sh
-    $ npm install
-    $ npm start
+    npm install
+    npm start
     ~~~
-
-1. **compute instance로 수행**하였다면 외부에서 접근하기 위하여 firewall 을 수정한다.
-
-   ~~~
-   $ sudo firewall-cmd --add-port=8000/tcp --permanent
-   $ sudo systemctl restart firewalld
-   ~~~
 
 1. **compute instance로 수행**하였다면 해당 포트에 대한 Security List 도 등록한다.
 
@@ -72,7 +100,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 1. 테스트 하기
 
-    웹브라우저로 `http://호스트IP:8000/`을 접속해 봅니다.
+    웹브라우저로 `http://호스트IP:8080/`을 접속해 봅니다.
 
     ![](images/app1.png)
 
@@ -89,7 +117,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 1. Dockerfile 살펴보기
 
-    sample-app 디렉토리 내에 Dockerfile 이 있습니다.
+    **cloud-native-oke** 디렉토리 내에 Dockerfile 이 있습니다.  
     이 파일은 도커 이미지를 만들기 위한 설정파일입니다.
     ~~~docker
     # Node 버젼 8의 이미지를 기본으로 합니다.
@@ -123,14 +151,14 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 1. 도커 이미지 만들기
     ~~~sh
-    $ cd sample-app
-    $ docker build -t sample-app .
+    cd cloud-native-oke
+    docker build -t sample-app .
     ~~~
 
     다음과 같이 도커 이미지가 만들어집니다.
     ~~~sh
     # 도커 이미지 만들기
-    $ docker build -t sample-app .
+    docker build -t sample-app .
 
     Sending build context to Docker daemon  2.099MB
     Step 1/7 : FROM node:8
@@ -151,13 +179,13 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     만들어진 도커 이미지를 확인하기 위하여 다음의 명령을 내립니다.
 
     ~~~sh
-    $ docker images
+    docker images
     ~~~
 
     다음과 같이 sample-app 이 만들어져 있음을 알 수 있습니다.
     ~~~sh
     # 도커 이미지 확인하기
-    $ docker images
+    docker images
     
     REPOSITORY           TAG                 IMAGE ID            CREATED              SIZE
     sample-app           latest              7f88f43f85c9        About a minute ago   904MB
@@ -179,11 +207,16 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     -e MYSQL_SERVICE_HOST=mydb
     ~~~
 
+    여러개의 환경변수는 -e 를 계속 반복해 줍니다.
+    ~~~
+     -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample 
+    ~~~
+
 1. 옵션설정 : 포트 포워딩
 
     해당 애프리케이션은 8000 포트로 서비스 됩니다. 그래서 같은 포트로 포워딩 하기위해 다음과 같은 옵션을 사용합니다. 앞의 8000 은 호스트의 포트이고, 뒤의 8000은 컨테이너의 포트입니다.
     ~~~
-    -p 8000:8000
+    -p 8080:8080
     ~~~
     
 1. 옵션설정 : 도커와 터미널 상호작용
@@ -198,77 +231,22 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
     최종적으로  다음과 같이 애플리케이션을 실행합니다.
     ~~~
-    $ docker run --name app -e MYSQL_SERVICE_HOST=mydb -p 8000:8000 -it sample-app
+    docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample  -p 8080:8080 -it sample-app
     ~~~
 
 1. 테스트 하기
 
-    웹브라우저로 `http://129.213.116.199:8080/`을 접속해 봅니다.
-    ![](https://github.com/shiftyou/cloudnative/blob/master/images/application2.PNG)
+    웹브라우저로 `http://호스트:8080/`을 접속해 봅니다.
+
+    
     이전에 애플리케이션으로 수행한 화면과 동일하지만, 표시되는 IP Address가 VM의 IP Address가 아닌 컨테이너의 IP Address를 나타내고 있습니다.
 
-    실행을 하면 다음과 같이 mydb 를 못찾겠다는 오류를 보냅니다.
-    ~~~
-    > sample-app@1.0.0 start /user/src/app
-    > node app.js
-
-    Server running on port: 8000
-    /user/src/app/app.js:26
-            throw err;
-            ^
-
-    Error: getaddrinfo ENOTFOUND mydb
-        at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:60:26)
-        --------------------
-        at Protocol._enqueue (/user/src/app/node_modules/mysql/lib/protocol/Protocol.js:144:48)
-        at Protocol.handshake (/user/src/app/node_modules/mysql/lib/protocol/Protocol.js:51:23)
-    ~~~
-
-    이는 두개의 컨테이너가 서로 연결되어 있지 않기 때문입니다. 
-    이를 위해서 별도로 docker의 network를 만들어야 합니다.
-
-1. 컨테이너 연결 시키기
-
-    컨테이너를 연결하기 위하여 network 를 만듭니다.
-    ~~~
-    $ docker network create mynet
-    ~~~
-
-    이 네트워크를 다른 컨테이너를 참여시켜야 합니다.  
-    먼저 mysql을 정지하고 참여시킵니다.
-    ~~~
-    # mysql을 정지합니다.
-    $ docker stop mydb
-
-    # mysql 컨테이너를 삭제합니다. (데이터가 사라집니다.)
-    $ docker rm mydb
-
-    # mynet 네트워크를 포함하여 실행합니다.
-    $ docker run --name mydb --network mynet -e MYSQL_ROOT_PASSWORD=mypassword -p 3306:3306 -d mysql:5.7 
-
-    # 다시 테이블을 만듭니다.
-    $ cat create.sql | docker exec -i mydb mysql -u root -pmypassword
-    ~~~
-
-    다음으로 app을 정지하고 참여시킵니다.
-    ~~~
-    # app을 정지합니다.
-    $ docker stop app
-
-    # app 컨테이너를 삭제합니다. (데이터가 사라집니다.)
-    $ docker rm app
-
-    # app 네트워크를 포함하여 실행합니다.
-    $ docker run --name app --network mynet -e MYSQL_SERVICE_HOST=mydb -p 8000:8000 -it sample-app
-
-    ~~~
-
-
-1. 완료
-
-    이로써 애플리케이션을 도커이미지로 만들고, 컨테이너로 수행완료하였습니다.  
-    웹브라우저로 `http://호스트IP:8000/`을 접속해 봅니다.
 
     ![](images/app2.png)
 
     표시되는 IP Address가 현재 VM의 IP Address를 나타내고 있습니다.
+
+    이로써 애플리케이션을 도커이미지로 만들고, 컨테이너로 수행완료하였습니다.  
+
+---
+완료하셨습니다.

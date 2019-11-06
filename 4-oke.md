@@ -66,11 +66,16 @@ Kubernetes를 설정하기 위해서는 권한을 부여해야 합니다.
 
     ![Alt text](https://monosnap.com/image/vhd4fUiyL5yZPJLsjH1IEOTxO8FwE6.png)
 
-1. 화면에 나온 명령어를 복사하여 터미널에서 실행합니다.
+1. 화면에 나온 명령어를 복사하여 터미널에서 실행합니다. 
 
     ~~~sh
     $ mkdir -p $HOME/.kube
-    $ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae ... --file $HOME/.kube/config --region us-ashburn-1
+    $ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaaftgmzbsmnswcgvr... --file $HOME/.kube/config --region ap-seoul-1 --token-version 2.0.0 
+    ~~~
+
+    그리고 token 버젼을 바꿔서 한번 더 실행합니다.
+    ~~~sh
+    $ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaaftgmzbsmnswcgvr... --file $HOME/.kube/config --region ap-seoul-1 --token-version 1.0.0 
     ~~~
 
     여기서 `ocid1.cluster.oc1.phx.aaaaaaaaae ...`는 현재 클러스터의 OCID입니다. 편의상 Kubeconfig 액세스 방법 대화 상자의 명령에 이미 클러스터의 OCID가 포함되어 있습니다.

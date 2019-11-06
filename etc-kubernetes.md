@@ -440,8 +440,8 @@ $ docker push iad.ocir.io/apackrsct01/sample-app
             ports:
             - containerPort: 8080
             name: oke-sample
-        imagePullSecrets:
-        - name: ocirsecret 
+          imagePullSecrets:
+            - name: ocirsecret 
     ~~~
     
     실행은 다음과 같이 합니다.

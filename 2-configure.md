@@ -2,13 +2,9 @@
 
 작업할 인스턴스를 생성하고 접속을 하는 단계입니다.
 
-1. public subnet 생성
-1. public subnet 으로 compute instance 생성
-
 # 인스턴스 생성
 
 로컬 컴퓨터에서 작업을 할 수도 있지만, 모든 작업을 할 인스턴스를 클라우드에서 생성합니다.
-
 
 
 # Putty로 인스턴스에 접속
@@ -32,11 +28,6 @@
 
 
 # docker 설치
-1. docker가 있는지 검사합니다.
-    ~~~
-    docker
-    ~~~
-
 1. docker를 설치합니다.
     ~~~
     sudo yum install -y docker-engine
@@ -55,11 +46,6 @@
 
 # kubectl 설치
 
-1. kubectl이 있는지 검사합니다.
-    ~~~
-    kubectl
-    ~~~
-
 1. kubectl을 설치합니다.
     ~~~
     sudo yum install -y kubectl
@@ -76,7 +62,7 @@
 
 1. 현재 터미널에 환경을 적용합니다.
     ~~~
-    . ./.bashrc
+    source ./.bashrc
     ~~~
 
 1. 설정을 합니다.
@@ -174,6 +160,15 @@
 
     ![](images/github5.png)
 
+# Git 설치
+
+1. git을 설치합니다.
+    ~~~
+    sudo yum install -y git
+    ~~~
+
+---
+완료하셨습니다.
 
 <!--
 # 방화벽 설정
