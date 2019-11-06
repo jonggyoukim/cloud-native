@@ -4,6 +4,7 @@
 ## 기본 namespace 바꾸기
 
 - 전체 namespace 보기
+
     ~~~
     $ kubectl get namespace
     NAME            STATUS   AGE
@@ -15,6 +16,7 @@
     ~~~
 
 - 현재 설정보기
+
     ~~~
     $ kubectl config get-contexts
     CURRENT   NAME                  CLUSTER               AUTHINFO           NAMESPACE
@@ -28,12 +30,14 @@
     ~~~
 
 - 기본 namespace 바꾸기 
+
     ~~~
     $ kubectl config set-context --current --namespace jonggyoukim
     Context "context-c2daobzgnrd" modified.
     ~~~
 
 - 확인
+
     ~~~
     $ kubectl config get-contexts
     CURRENT   NAME                  CLUSTER               AUTHINFO           NAMESPACE
@@ -58,8 +62,12 @@
 ## Kubectl
 
 - 전체 리소스 보기
+
     ~~~
     $ kubectl get all
+    ~~~
+
+    ~~~
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running   0          13m
 
@@ -74,9 +82,11 @@
     ~~~
 
 - POD 자세히 보기
+
     ~~~
     $ kubectl describe pod/oke-sample-7bdd498bd7-fqrkx
     ~~~
+
     ~~~
     Name:               oke-sample-7bdd498bd7-fqrkx
     Namespace:          jonggyoukim
@@ -134,9 +144,28 @@
     Normal  Started    17m   kubelet, 10.0.11.2  Started container
     ~~~
 
-- ReplicaSet 늘이기
+- POD 늘이기
 
-~~~
-~~~
+    ~~~
+    $ kubectl scale deployments/oke-sample --replicas=4
+    ~~~
 
+- POD 늘이기 확인
+    ~~~
+    $ kubectl get all
+    NAME                              READY   STATUS              RESTARTS   AGE
+    pod/oke-sample-7bdd498bd7-98bkm   1/1     Running             0          7s
+    pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running             0          5h58m
+    pod/oke-sample-7bdd498bd7-rcl4m   0/1     ContainerCreating   0          7s
+    pod/oke-sample-7bdd498bd7-shz5t   0/1     ContainerCreating   0          7s
+
+    NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)          AGE
+    service/oke-sample   LoadBalancer   10.96.246.11   150.136.200.30   8080:30192/TCP   5h58m
+
+    NAME                         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/oke-sample   4         4         4            2           5h58m
+
+    NAME                                    DESIRED   CURRENT   READY   AGE
+    replicaset.apps/oke-sample-7bdd498bd7   4         4         2       5h58m
+    ~~~
 

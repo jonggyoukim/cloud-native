@@ -148,15 +148,6 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     CMD ["npm", "start"]
     ~~~
 
-1. .dockerignore 살펴보기
-
-    이 파일은 도커 이미지를 만들때 포함되지 않아야 할 항목을 나열한 파일입니다.
-
-    ~~~docker
-    node_modules
-    npm-debug.log 
-    ~~~
-
 1. 도커 이미지 만들기
     ~~~sh
     cd cloud-native-oke
@@ -206,34 +197,6 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 앞서 만든 애플리케이션 이미지를 사용하여 컨테이너를 실행해 보도록 합니다.
 
-1. 옵션설정 : 필요한 환경변수 대입하기
-
-    이 애플리케이션은 필요한 환경변수 `MYSQL_SERVICE_HOST`가 있습니다. 이 환경변수는 mysql 이 서비스 되고 있는 호스트를 나타낸니다. 설정하지 않으면 `localhost`로 대입되어 해당 애플리케이션 이미지에는 mysql이 존재하지 않아 애플리케이션이 동작하지 않습니다. 여기에서는 mysql 이 mydb 라는 이름의 컨테이너로 수행되기에 mydb라고 명명합니다.
-
-    도커에서 환경변수의 값은 `-e` 옵션을 사용하여 대입합니다.
-    ~~~
-    -e MYSQL_SERVICE_HOST=mydb
-    ~~~
-
-    여러개의 환경변수는 -e 를 계속 반복해 줍니다.
-    ~~~
-     -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample 
-    ~~~
-
-1. 옵션설정 : 포트 포워딩
-
-    해당 애프리케이션은 8000 포트로 서비스 됩니다. 그래서 같은 포트로 포워딩 하기위해 다음과 같은 옵션을 사용합니다. 앞의 8000 은 호스트의 포트이고, 뒤의 8000은 컨테이너의 포트입니다.
-    ~~~
-    -p 8080:8080
-    ~~~
-    
-1. 옵션설정 : 도커와 터미널 상호작용
-
-    -it 옵션을 주어 컨테이너에서 나오는 로그를 출력하고 입력을 할 수 있게 합니다.
-    ~~~
-    -it
-    ~~~
-
     
 1. 애플리케이션 실행하기
 
@@ -241,6 +204,34 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     ~~~
     docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample  -p 8080:8080 -it sample-app
     ~~~
+
+    1. 옵션설정 : 필요한 환경변수 대입하기
+
+        이 애플리케이션은 필요한 환경변수 `MYSQL_SERVICE_HOST`가 있습니다. 이 환경변수는 mysql 이 서비스 되고 있는 호스트를 나타낸니다. 설정하지 않으면 `localhost`로 대입되어 해당 애플리케이션 이미지에는 mysql이 존재하지 않아 애플리케이션이 동작하지 않습니다. 여기에서는 mysql 이 mydb 라는 이름의 컨테이너로 수행되기에 mydb라고 명명합니다.
+
+        도커에서 환경변수의 값은 `-e` 옵션을 사용하여 대입합니다.
+        ~~~
+        -e MYSQL_SERVICE_HOST=mydb
+        ~~~
+
+        여러개의 환경변수는 -e 를 계속 반복해 줍니다.
+        ~~~
+        -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample 
+        ~~~
+
+    1. 옵션설정 : 포트 포워딩
+
+        해당 애프리케이션은 8000 포트로 서비스 됩니다. 그래서 같은 포트로 포워딩 하기위해 다음과 같은 옵션을 사용합니다. 앞의 8000 은 호스트의 포트이고, 뒤의 8000은 컨테이너의 포트입니다.
+        ~~~
+        -p 8080:8080
+        ~~~
+        
+    1. 옵션설정 : 도커와 터미널 상호작용
+
+        -it 옵션을 주어 컨테이너에서 나오는 로그를 출력하고 입력을 할 수 있게 합니다.
+        ~~~
+        -it
+        ~~~
 
 1. 테스트 하기
 
