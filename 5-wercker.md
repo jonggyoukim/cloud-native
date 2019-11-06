@@ -62,8 +62,8 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
     
     생성된 토큰을 복사한 후 Wercker에 다음과 같이 입력하고 Add 버튼을 클릭합니다.
 
-    **Key:** OCI_AUTH_TOKEN  
-    **Value:** 토큰값 (예: 8K2}JTG96[d82{XXVWRq)
+    - **Key:** OCI_AUTH_TOKEN  
+    - **Value:** 토큰값 (예: 8K2}JTG96[d82{XXVWRq)
 
     ![](images/wercker9.png)
     
@@ -71,8 +71,8 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
 
     여기서는 애슈번(Ashburn) 리전에 있는 Registry를 사용하도록 하겠습니다.
 
-    **Key:** DOCKER_REGISTRY  
-    **Value:** 지역.ocir.io (예: iad.ocir.io)
+    - **Key:** DOCKER_REGISTRY  
+    - **Value:** 지역.ocir.io (예: iad.ocir.io)
 
     > Container Registry는 각 리전별로 존재합니다. Registry는 리전키 + ocir.io로 구성되는데, 리전키의 경우는 현재 icn(서울), nrt(도쿄), yyz(토론토), fra(프랑크푸르트), lhr(런던), iad(애쉬번), phx(피닉스)입니다. 
 
@@ -86,8 +86,8 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
 
     여기에 Tenancy명이 필요합니다. 아래 Value는 예시이며, 보통 다음과 같이 구성됩니다.
 
-    **Key:** DOCKER_USERNAME  
-    **Value:** 태넌시명/아이디 (예: my_tenancy/jonggyou.kim@oracle.com)
+    - **Key:** DOCKER_USERNAME  
+    - **Value:** 태넌시명/아이디 (예: skimgmt/jonggyou.kim@oracle.com)
 
     ![](images/wercker12.png)
 
@@ -99,8 +99,8 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
     
     >**!!! Repository는 Tenancy에서 공통으로 사용하기 때문에 각자 레파지토리 이름이 달라야 하므로, 영문 이니셜을 뒤에 붙입니다.**
 
-    **Key:** DOCKER_REPO  
-    **Value:** 태넌시/특정이름 (예: my_tenancy/cloud-native-oke-jonggyoukim)
+    - **Key:** DOCKER_REPO  
+    - **Value:** 태넌시/특정이름 (예: skimgmt/cloud-native-oke-jonggyoukim)
 
     ![](images/wercker14.png)
 
@@ -108,8 +108,8 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
 
     ![](images/wercker15.png)
 
-    **Key:** KUBERNETES_MASTER  
-    **Value:**: KUBERNETES SERVER MASTER URL (예: https://c2daobzgnrd.us-ashburn-1.clusters.oci.oraclecloud.com:6443)
+    - **Key:** KUBERNETES_MASTER  
+    - **Value:**: KUBERNETES SERVER MASTER URL (예: https://c2daobzgnrd.us-ashburn-1.clusters.oci.oraclecloud.com:6443)
 
     ![](images/wercker16.png)
 
@@ -118,16 +118,16 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
     ![](images/wercker17.png)
 
 
-    **Key:** KUBERNETES_AUTH_TOKEN  
-    **Value:**: KUBERNETES AUTH TOKEN (예: LS0tLS1CRUdJTiBDRVJUSU.....)
+    - **Key:** KUBERNETES_AUTH_TOKEN  
+    - **Value:**: KUBERNETES AUTH TOKEN (예: LS0tLS1CRUdJTiBDRVJUSU.....)
 
     ![](images/wercker18.png)
 
 
 1. KUBERNETES_NAMESPACE를 사용하는 이유는 동일한 서비스를 여러 사람이 동일한 노드에 배포하기 때문에 각 Pod와 Deployment, Service를 각 사용자별로 생성하기 위함입니다. Kubernetes Cluster에 Namespace를 지정하여 Pod, Service, Deployment, Secret을 분리합니다. 
 
-    **Key:** KUBERNETES_NAMESPACE  
-    **Value:**: 고유한 값 (예: jonggyoukim)
+    - **Key:** KUBERNETES_NAMESPACE  
+    - **Value:**: 고유한 값 (예: jonggyoukim)
 
     ![](images/wercker19.png)
 
