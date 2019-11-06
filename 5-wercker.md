@@ -338,7 +338,7 @@ oke:
     replicaset.apps/oke-sample-7bdd498bd7   1         1         1       75s
     ~~~
 
-    아직 **<pending>** 상태이면 IP가 나올 때 까지 반복한다.
+    아직 **&lt;pending&gt;** 상태이면 IP가 나올 때 까지 반복한다.
 
     ~~~ 
     kubectl get all -n {네임스페이스}
