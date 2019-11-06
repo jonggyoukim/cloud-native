@@ -172,7 +172,7 @@
 
 1. 완료가 되면 repository가 준비됩니다.
 
-    ![](images/github5.png);
+    ![](images/github5.png)
 
 
 <!--
