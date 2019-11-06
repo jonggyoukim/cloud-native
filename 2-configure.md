@@ -160,12 +160,6 @@
 
     ![](images/github5.png)
 
-# Git 설치
-
-1. git을 설치합니다.
-    ~~~
-    sudo yum install -y git
-    ~~~
 
 ---
 완료하셨습니다.
