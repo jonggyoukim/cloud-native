@@ -28,7 +28,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 ## 데이터베이스 시작  (**📌 미리 설정했다면 건너뛰기**)
 
-1. 포트 열기
+1. 인스턴스 포트 열기
 
     ~~~sh
     sudo firewall-cmd --add-port=3306/tcp --permanent
@@ -52,7 +52,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 ## 애플리케이션 시작
 
-1. 포트 열기
+1. 인스턴스 포트 열기
 
     ~~~sh
     sudo firewall-cmd --add-port=8080/tcp --permanent
@@ -88,7 +88,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     curl localhost:8080
     ~~~
 
-1. Security List 변경 (**📌 미리 설정했다면 건너뛰기**)
+1. 클라우드 8080 포트 열기 (**📌 미리 설정했다면 건너뛰기**)
 
     ![](./images/security1.png)
 
