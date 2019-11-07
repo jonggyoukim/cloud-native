@@ -17,7 +17,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
     ~~~
     cd
-    git clone https://github.com/{아이디}/cloud-native-oke
+    git clone https://github.com/아이디/cloud-native-oke
     ~~~
 
     sample-app 디렉토리로 이동을 합니다.
@@ -38,16 +38,8 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 1. MySQL 컨테이너 실행하기
 
     ~~~
-    docker run --name mydb -e MYSQL_ROOT_PASSWORD=mypassword -p 3306:3306 -d mysql:5.7 
+    docker run --name mydb -e MYSQL_ROOT_PASSWORD=mypassword -p 3306:3306 -d shiftyou/oke-mysql 
     ~~~
-
-1. 애플리케이션용 테이블 만들기
-
-    ~~~sh
-    cat create.sql | docker exec -i mydb mysql -u root -pmypassword
-    #exit
-    ~~~
-
 
 
 ## 애플리케이션 시작
@@ -102,7 +94,8 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
 1. 테스트 하기
 
-    웹브라우저로 `http://호스트IP:8080/`을 접속해 봅니다.
+    웹브라우저로 `http://호스트IP:8080/`을 접속해 봅니다.  
+    **호스트IP**는 해당 인스턴스의 공유IP 입니다.
 
     ![](images/app1.png)
 
@@ -145,6 +138,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 1. 도커 이미지 만들기
     ~~~sh
     cd cloud-native-oke
+
     sudo docker build -t sample-app .
     ~~~
 
@@ -196,7 +190,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
     최종적으로  다음과 같이 애플리케이션을 실행합니다.
     ~~~
-    sudo docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample  -p 8080:8080 -it sample-app
+    sudo docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample -d -p 8080:8080 sample-app
     ~~~
 
     1. 옵션설정 : 필요한 환경변수 대입하기
@@ -219,25 +213,37 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
         ~~~
         -p 8080:8080
         ~~~
-        
-    1. 옵션설정 : 도커와 터미널 상호작용
 
-        -it 옵션을 주어 컨테이너에서 나오는 로그를 출력하고 입력을 할 수 있게 합니다.
-        ~~~
-        -it
-        ~~~
+1. 컨테이너 정보보기
+
+    현재 운영중인 Container를 출력합니다.
+
+    ~~~
+    $ docker ps
+
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
+    9fc6ec72293b        sample-app          "docker-entrypoint.s…"   39 seconds ago      Up 38 seconds       0.0.0.0:8080->8080/tcp              app
+    ~~~
+
+    **9fc6ec72293b** 이라는 Container ID를 사용하여 해당 Container가 가지는 IP를 확인 합니다.
+    ~~~
+    $ sudo docker inspect -f  "{{ .NetworkSettings.IPAddress }}" 컨테이너아이디
+
+    172.18.0.3
+    ~~~
+
 
 1. 테스트 하기
 
-    웹브라우저로 `http://호스트:8080/`을 접속해 봅니다.
-
+    웹브라우저로 `http://호스트IP:8080/`을 접속해 봅니다.  
+    **호스트IP**는 해당 인스턴스의 공유IP 입니다.
     
     이전에 애플리케이션으로 수행한 화면과 동일하지만, 표시되는 IP Address가 VM의 IP Address가 아닌 컨테이너의 IP Address를 나타내고 있습니다.
 
 
     ![](images/app2.png)
 
-    표시되는 IP Address가 현재 VM의 IP Address를 나타내고 있습니다.
+    표시되는 IP Address가 현재 Docker Container의 IP Address를 나타내고 있습니다.
 
     이로써 애플리케이션을 도커이미지로 만들고, 컨테이너로 수행완료하였습니다.  
 
