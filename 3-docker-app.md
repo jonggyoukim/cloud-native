@@ -88,7 +88,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     curl localhost:8080
     ~~~
 
-1. **compute instance로 수행**하였다면 해당 포트에 대한 Security List 도 등록한다. (**📌 미리 설정했다면 건너뛰기**)
+1. Security List 변경 (**📌 미리 설정했다면 건너뛰기**)
 
     ![](./images/security1.png)
 
@@ -151,7 +151,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     다음과 같이 도커 이미지가 만들어집니다.
     ~~~sh
     # 도커 이미지 만들기
-    sudo docker build -t sample-app .
+    $ sudo docker build -t sample-app .
 
     Sending build context to Docker daemon  2.099MB
     Step 1/7 : FROM node:8
@@ -178,7 +178,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     다음과 같이 sample-app 이 만들어져 있음을 알 수 있습니다.
     ~~~sh
     # 도커 이미지 확인하기
-    docker images
+    $ sudo docker images
     
     REPOSITORY           TAG                 IMAGE ID            CREATED              SIZE
     sample-app           latest              7f88f43f85c9        About a minute ago   904MB

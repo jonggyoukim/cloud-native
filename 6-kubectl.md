@@ -7,6 +7,7 @@
 
     ~~~
     $ kubectl get namespace
+
     NAME            STATUS   AGE
     default         Active   173d
     ingress-nginx   Active   110d
@@ -19,12 +20,14 @@
 
     ~~~
     $ kubectl config get-contexts
+
     CURRENT   NAME                  CLUSTER               AUTHINFO           NAMESPACE
     *         context-c2daobzgnrd   cluster-c2daobzgnrd   user-c2daobzgnrd
-
-    ---
-
+    ~~~
+    
+    ~~~
     $ kubectl get all
+
     NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
     service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7h6m
     ~~~
@@ -33,6 +36,7 @@
 
     ~~~
     $ kubectl config set-context --current --namespace jonggyoukim
+
     Context "context-c2daobzgnrd" modified.
     ~~~
 
@@ -40,12 +44,14 @@
 
     ~~~
     $ kubectl config get-contexts
+
     CURRENT   NAME                  CLUSTER               AUTHINFO           NAMESPACE
     *         context-c2daobzgnrd   cluster-c2daobzgnrd   user-c2daobzgnrd   jonggyoukim
-
-    ---
-
+    ~~~
+    
+    ~~~
     $ kubectl get all
+
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running   0          13m
 
@@ -65,9 +71,7 @@
 
     ~~~
     $ kubectl get all
-    ~~~
 
-    ~~~
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running   0          13m
 
@@ -85,9 +89,7 @@
 
     ~~~
     $ kubectl describe pod/oke-sample-7bdd498bd7-fqrkx
-    ~~~
 
-    ~~~
     Name:               oke-sample-7bdd498bd7-fqrkx
     Namespace:          jonggyoukim
     Priority:           0

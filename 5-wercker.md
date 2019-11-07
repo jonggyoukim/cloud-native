@@ -35,20 +35,19 @@ Wercker에서는 하나의 Github Repository에 대응되는 단위를 애플리
 
 Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미지를 푸시하기 위한 설정을 합니다. 상단 탭 메뉴중에서 **Environment**를 선택합니다.
 
-![](images/wercker-env.png)
+![](images/wercker19.png)
 
-여기서 필요한 Key와 Value는 다음과 같습니다. 
+필요한 Key와 Value는 다음과 같습니다. 
 
-1. OCI_AUTH_TOKEN
-1. DOCKER_REGISTRY
-1. DOCKER_USERNAME
-1. DOCKER_REPO
-1. KUBERNETES_MASTER
-1. KUBERNETES_AUTH_TOKEN
-1. KUBERNETES_NAMESPACE
+- OCI_AUTH_TOKEN
+- DOCKER_REGISTRY
+- DOCKER_USERNAME
+- DOCKER_REPO
+- KUBERNETES_MASTER
+- KUBERNETES_AUTH_TOKEN
+- KUBERNETES_NAMESPACE
     
-
-> 여기서 KUBERNETES_MASTER와 KUBERNETES_AUTH_TOKEN은 $HOME/.kube/config (kubeconfig) 파일의 내용을 참조해서 설정합니다.
+각 항목을 어떤값으로 설정하는지 살펴보도록 합니다.
 
 1. OCI_AUTH_TOKEN
 
@@ -97,7 +96,7 @@ Wercker Application에서 **Oracle Container Registry** 에 컨테이너 이미�
 
     ![](images/wercker13.png)
     
-    >**!!! Repository는 Tenancy에서 공통으로 사용하기 때문에 각자 레파지토리 이름이 달라야 하므로, 영문 이니셜을 뒤에 붙입니다.**
+    >**📌 Repository는 Tenancy에서 공통으로 사용하기 때문에 각자 레파지토리 이름이 달라야 하므로, 영문 이니셜을 뒤에 붙입니다.**
 
     - **Key:** DOCKER_REPO  
     - **Value:** 태넌시/특정이름 (예: skimgmt/cloud-native-oke-jonggyoukim)
@@ -287,7 +286,7 @@ oke:
 - oke
 
     OKE에 해당 image를 컨테이너로 서비스하는 과정  
-    >중복을 회피하기 위하여 namespace 사용합니다.
+    중복을 회피하기 위하여 namespace 사용합니다.
 
 # Wercker를 통해 자동배포하기
 
@@ -319,12 +318,13 @@ oke:
 
 1. wercker 에서 자동으로 CI/CD가 동작되는 것을 확인한다.
 
-    ![](images/wercker25.png)
+    ![](images/wercker26.png)
 
 1. kubectl 로 IP가 할당됨을 확인한다.
 
     ~~~
     $ kubectl get all -n {네임스페이스}
+    
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running   0          75s
 
@@ -341,7 +341,8 @@ oke:
     아직 **&lt;pending&gt;** 상태이면 IP가 나올 때 까지 반복한다.
 
     ~~~ 
-    kubectl get all -n {네임스페이스}
+    $ kubectl get all -n {네임스페이스}
+    
     NAME                              READY   STATUS    RESTARTS   AGE
     pod/oke-sample-7bdd498bd7-fqrkx   1/1     Running   0          76s
 
