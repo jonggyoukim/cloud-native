@@ -157,7 +157,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     다음과 같이 도커 이미지가 만들어집니다.
     ~~~sh
     # 도커 이미지 만들기
-    docker build -t sample-app .
+    sudo docker build -t sample-app .
 
     Sending build context to Docker daemon  2.099MB
     Step 1/7 : FROM node:8
@@ -178,7 +178,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
     만들어진 도커 이미지를 확인하기 위하여 다음의 명령을 내립니다.
 
     ~~~sh
-    docker images
+    sudo docker images
     ~~~
 
     다음과 같이 sample-app 이 만들어져 있음을 알 수 있습니다.
@@ -202,7 +202,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
     최종적으로  다음과 같이 애플리케이션을 실행합니다.
     ~~~
-    docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample  -p 8080:8080 -it sample-app
+    sudo docker run --name app  -e MYSQL_SERVICE_HOST=129.213.149.203 -e MYSQL_SERVICE_USER=test -e MYSQL_SERVICE_PASSWORD=Welcome1 -e MYSQL_SERVICE_DATABASE=sample  -p 8080:8080 -it sample-app
     ~~~
 
     1. 옵션설정 : 필요한 환경변수 대입하기
