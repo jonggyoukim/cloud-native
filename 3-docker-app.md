@@ -17,7 +17,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 
     ~~~
     cd
-    git clone https://github.com/jonggyoukim/cloud-native-oke
+    git clone https://github.com/{아이디}/cloud-native-oke
     ~~~
 
     sample-app 디렉토리로 이동을 합니다.
@@ -151,7 +151,7 @@ Node.JS로 만들어진 사용자를 관리하는 애플리케이션을 작성�
 1. 도커 이미지 만들기
     ~~~sh
     cd cloud-native-oke
-    docker build -t sample-app .
+    sudo docker build -t sample-app .
     ~~~
 
     다음과 같이 도커 이미지가 만들어집니다.
