@@ -38,10 +38,20 @@
     sudo systemctl start docker
     sudo systemctl enable docker
     ~~~
+1. 자신의 계정을 docker 그룹에 넣습니다.
+
+    ~~~
+    $ sudo usermod -aG docker $USER
+    ~~~
+
+    그 exit 하고 난 다음 다시 접속합니다.
+    ~~~
+    $ exit
+    ~~~
 
 1. 확인합니다.
     ~~~
-    sudo docker ps
+    docker ps
     ~~~
 
 # kubectl 설치
