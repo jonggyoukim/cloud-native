@@ -1,6 +1,6 @@
 # SK을 위한 컨테이너 실습
 
-단기 실습은 [여기](https://jonggyoukim.github.io/cloud-native-hour/) 를 눌러주십시오
+단기 실습은 [https://jonggyoukim.github.io/cloud-native-hour/](https://jonggyoukim.github.io/cloud-native-hour/) 를 눌러주십시오
 
 # 컨테이너 실습
 
