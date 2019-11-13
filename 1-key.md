@@ -1,10 +1,18 @@
 
 
-# 필요파일을 다운로드
+# 필요파일 다운로드
 - [putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe)
 - [puttygen](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe)
+- [Key 다운로드](https://github.com/jonggyoukim/cloud-native/raw/master/files/Key.zip) - zip 파일을 풀어주세요.
 
-# key 를 생성
+---
+완료하셨습니다.
+
+
+>아래는 key 파일을 만드는 과정을 설명한 것입니다.  
+>위의 다운로드를 받았기 때문에 수행하지 않아도 됩니다. 
+
+# 참고- key 를 생성하는 법
 
 1. puttygen 을 실행하고 Generate 를 클릭한다.
 
@@ -26,10 +34,12 @@
 
 이렇게 public/private key 쌍을 준비해 놓고 다음 진행을 합니다.  
 위의 과정으로 만들어진 key  값들은 다음과 같습니다.
-- [publickey.pub](./files/publickey.pub)
-- [privatekey.ppk](./files/privatekey.ppk)
+- publickey.pub
+- privatekey.ppk
 
-이미 만들어진 key를 다운로드 하여 사용하도록 합니다.
 
+이미 만들어진 key를 다운로드 하여 사용하도록 합니다.  
+아래의 파일을 다운로드 받으세요.
+- [Key 다운로드](https://github.com/jonggyoukim/cloud-native/raw/master/files/Key.zip) - zip 파일을 풀어주세요.
 ---
 완료하셨습니다.
